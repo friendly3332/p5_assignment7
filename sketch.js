@@ -15,12 +15,12 @@ let water;
 
 function preload() {
   knight = loadImage('./charactercreator/knight.png');
-  wizard = loadImage('./charactercreater/wizard.png');
+  wizard = loadImage('./charactercreator/wizard.png');
   rogue = loadImage('./charactercreator/rogue.png');
     
   forest = loadImage('./charactercreator/forestbg.png');
   tavern = loadImage('./charactercreator/tavernbg.png');
-  rocks = loadImage('./charactercreator/rockbg.png');
+  rocks = loadImage('./charactercreator/rocksbg.png');
   water = loadImage('./charactercreator/waterbg.png');
 }
 
@@ -63,13 +63,18 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  text(nameInput.value(), windowWidth/2, 300);
-  text(skinColor.value(), 300, 300);
+    background(220);
   
-    //this would have been the body... If it worked
-  fill(skinColor.color());
-  ellipse(windowWidth/2, windowHeight/2, 60, 60);
+    
+    changeBackground();
+    changeClothes();
+    
+    fill(255);
+    rectMode(CENTER);
+    rect(windowWidth/2, 145, 200, 10);
+    fill(0);
+    text(nameInput.value(), windowWidth/2, 150);
+    rectMode(CORNER);
   
 }
 
@@ -88,18 +93,36 @@ function windowResized() {
 
 function changeClothes(){
     //image based on selection
-    image(knight, windowWidth/2, 0);
+    if(clothesSelect.value() === 'knight'){
+        changeBackground();
+        fill(skinColor.color());
+        ellipse(740, 235, 49, 49);
+        rect(702, 258, 70, 59);
+        image(knight, 700, 200);
+    } else if(clothesSelect.value() === 'wizard'){
+        changeBackground();
+        fill(skinColor.color());
+        ellipse(740, 260 ,43, 43);
+        rect(710, 290 ,59, 39);
+        image(wizard, 700, 200);
+    } else{
+        changeBackground();
+        fill(skinColor.color());
+        ellipse(744, 235, 49, 49);
+        rect(710, 258, 70, 55);
+        image(rogue, 700, 200);
+    } 
 }
 
 function changeBackground(){
     if(backgroundSelect.value() === 'forest'){
-        image(forest, windowWidth/2, 0);
+        image(forest, 500, 0);
     } else if(backgroundSelect.value() === 'tavern'){
-        image(tavern, windowWidth/2, 0);
+        image(tavern, 500, 0);
     } else if(backgroundSelect.value() === 'rocks'){
-        image(rocks, windowWidth/2, 0);
+        image(rocks, 500, 0);
     } else{
-        image(water, windowWidth/2, 0);
+        image(water, 500, 0);
     }
 }
 
